@@ -11,13 +11,13 @@ $gifs = [
     [
     'title' => '2014 Rossignol District Snowboard',
     'categories' => 'Доски и лыжи',
-    'price' => '10999',
+    'price' => '10999.55',
     'img' => 'img/lot-1.jpg',
     ],
     [
     'title' => 'DC Ply Mens 2016/2017 Snowboard',
     'categories' => 'Доски и лыжи',
-    'price' => '159999',
+    'price' => '159999.45',
     'img' => 'img/lot-2.jpg',
     ],
     [
@@ -48,8 +48,20 @@ $gifs = [
 ];
 
 
+function price($price){
+
+	$price = ceil($price);
+
+    if ($price >= 1000){
+        $price = number_format($price, 0, ',', ' ');   
+    }
+    $price .= " ₽";
+    return $price;
+}
+
 
 ?>
+
 
 
 
@@ -58,7 +70,7 @@ $gifs = [
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <title>Главная <?php print($text)  ?></title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 </head>
@@ -67,7 +79,7 @@ $gifs = [
 
 <header class="main-header">
     <div class="main-header__container container">
-        <h1 class="visually-hidden">YetiCave</h1>
+        <h1 class="visually-hidden">YetiCave </h1>
         <a class="main-header__logo">
             <img src="../img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
         </a>
@@ -106,7 +118,7 @@ $gifs = [
 
 <main class="container">
     <section class="promo">
-        <h2 class="promo__title">Нужен стафф для катки?</h2>
+        <h2 class="promo__title">Нужен стафф для катки? </h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
             <!--заполните этот список из массива категорий-->
@@ -123,9 +135,8 @@ $gifs = [
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-        <?php foreach ($gifs as $key => $val): ?>
             <!--заполните этот список из массива с товарами-->
-            
+        <?php foreach ($gifs as $key => $val): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?=$val['img']; ?>" width="350" height="260" alt="">
@@ -136,7 +147,7 @@ $gifs = [
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">стартовая цена</span>
-                            <span class="lot__cost"><?=$val['price']; ?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=price($val['price']);?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
@@ -144,7 +155,7 @@ $gifs = [
                     </div>
                 </div>
             </li>
-        <?php endforeach; ?>    
+        <?php endforeach; ?>   <!-- конец цикла , перечесления массива -->
         </ul>
     </section>
 </main>
